@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8"/>
+        <link rel="shortcut icon" href="#" />
+        <meta name="viewport" content="width=device-width , initial-scale = 1.0">
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,700;0,900;1,800&display=swap" rel="stylesheet"> 
+    </head>
+    <title>
+        Weather App
+    </title>
+    <body class="background " id = "background" style="background-color:slategrey;">
+        <div class="background">
+            <h1 style="font-family: 'Montserrat', sans-serif; text-align: center; font-size: xx-large;">Weather App</h1>
+        </div>
+        
+        <div class= "info" >
+            
+            <div class="content">
+                <h1 class="location" style="text-align: center; font-family: 'Montserrat', sans-serif;"> {% location %},{% country %}  </h1>
+               
+                <p id = "currentDate" style="text-align: center;font-family: 'Montserrat', sans-serif;"> FRI | 23 JUL | 05:00 </p>
+                <h1 class="temp" style="text-align: center; font-family: 'Montserrat', sans-serif;">{% temp %}&deg;C</h1>
+                <p class="feels" style="text-align: center;font-family: 'Montserrat', sans-serif;">Feels Like : {% tempfeels %}&deg;C</p>
+                <h3 class="tempsval" style="text-align: center; font-family: 'Montserrat', sans-serif;"> {% tempStatus1 %} </h3>
+                <p class="temp_min_max" style="text-align: center;font-family: 'Montserrat', sans-serif;"> Min : {% tempmin %}&deg;C | Max : {% tempmax %}&deg;C </p>
+            </div>
+
+        </div>
+    </body>
+</html>
+<style>
+    .info{
+  border-radius: 25px;
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  width: 400px;
+  height: 400px;
+  
+}
+.content{
+    margin-top: 50px;
+    padding-top: 50px;
+}
+#weathercon {
+        height: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3em;
+      }
+
+      #weathercon .fas {
+        font-size: 6rem;
+        
+      }
+
+</style>
+<script>
+    console.log("hello");
+    const currentDate = document.getElementById("currentDate");
+    time =() =>{
+    const date = new Date();
+    const month  = date.getMonth() ;
+    const day = date.getDay();
+    const year = date.getFullYear();
+    const taareek = date.getDate();
+    
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+    const din = days[day];
+    const mahina = months[month];
+    let hours = date.getHours();
+    let mins = date.getMinutes();
+    let periods = "AM";
+                if (hours > 11){
+                    periods = "PM";
+                    if (hours >12) hours -= 12;
+
+                }
+                if (mins < 10){
+                    mins = "0" +mins;
+                }
+                
+    return `${din} | ${taareek} ${mahina} | ${hours}:${mins} ${periods}`;
+
+            };
+            currentDate.innerHTML =  time();
+            const tempStatus = "Clear";
+            console.log(tempStatus);
+            if(tempStatus == "Clouds"){
+                weathercon.innerHTML ="<i class='fas fa-cloud' style='color:black;'></i>";
+                
+            }
+            else if (tempStatus ==  "Clear"){
+              
+                    weathercon.innerHTML = "<i class='fas fa-sun' style='color: black;'></i>";
+                
+                
+            }
+            else if (tempStatus ==  "Rain"){
+                weathercon.innerHTML = "<i class='fas fa-cloud-showers-heavy' style= 'color: black;''></i>";
+            }
+            else if (tempStatus ==  "Thunderstorm"){
+                weathercon.innerHTML = "<span class='iconify'data-icon='wi-thunderstorm 'data-inline='false'></span>";
+            }
+            else if (tempStatus ==  "Drizzle"){
+                weathercon.innerHTML = "<span class='iconify' data-icon='uil-cloud-drizzle' data-inline='false'></span>";
+            }
+            
+            else{
+                weathercon.innerHTML = "<i class='fas fa-sun' style='color: #eccc68;'></i>";
+            }           
+</script>
